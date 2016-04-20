@@ -1,0 +1,8 @@
+<h1>New article</h1>
+<% @users = Article.all%>
+<%= render @users %>
+
+<%= render 'form' %>
+ 
+<%= link_to 'Back', articles_path %>
+
