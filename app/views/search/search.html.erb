@@ -1,0 +1,58 @@
+<style type="text/css">
+  em {
+  background: yellow;
+}
+</style>
+
+<h1>Articles Search</h1>
+
+<%= form_for search_path, method: :get do |f| %>
+  <p>
+    <%= f.label "Search for" %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Go", name: nil %>
+  </p>
+<% end %>
+
+<ul>
+  <% @response.each do |article| %>
+    <% if article.type == "article" %>
+      <li>
+        <h3>
+          <%= link_to article.try(:highlight).try(:title) ? article.highlight.title[0].html_safe : article.title,
+            controller: "articles",
+            action: "show",
+            id: article._id%>
+        </h3>
+        <% if article.try(:highlight).try(:text) %>
+          <% article.highlight.text.each do |snippet| %>
+            <p><%= snippet.html_safe %>...</p>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+Commenter:
+<ul>
+  <% @response.each do |article| %>
+    <% if article.type == "comment" %>
+      <li>
+        <h3>
+          <%= link_to article.try(:highlight).try(:commenter) ? article.highlight.commenter[0].html_safe : article.commenter,
+            controller: "articles",
+            action: "show",
+            id: article._id%>
+        </h3>
+        <% if article.try(:highlight).try(:body) %>
+          <% article.highlight.body.each do |snippet| %>
+            <p><%= snippet.html_safe %>...</p>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', articles_path %>
