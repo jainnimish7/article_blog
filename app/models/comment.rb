@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
-  include Searchable
+#  include Searchable
   belongs_to :article
+  searchkick
 end
-Comment.import
+#Comment.import

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   #get 'shubh/index'
   resources :articles do
+    get :autocomplete, on: :collection
     resources :comments
   end
   # The priority is based upon order of creation: first created -> highest priority.

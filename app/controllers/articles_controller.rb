@@ -18,6 +18,10 @@ class ArticlesController < ApplicationController
       #redirect_to new_article_path
     end
   end
+  # for autocomplete
+  def autocomplete
+    render json: Article.search(params[:term], fields: [{text: :text_start}, :comment_body, :title], highlight: true, limit: 10).map(&:text)
+  end
 
   def edit
     @article = Article.find(params[:id])
