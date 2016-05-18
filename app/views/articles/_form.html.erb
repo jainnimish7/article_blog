@@ -1,5 +1,18 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+  $(function () {
+    $( ".datepicker" ).datepicker({
+      dateFormat: 'dd/mm/yy',
+      minDate: '-1w',
+      maxDate: '+1w',
+      numberOfMonths: [ 1, 2 ]
+    });
+  });
+</script>
+
 <%= form_for @article do |f| %>
- 
+ <div class="row">
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -13,20 +26,24 @@
       </ul>
     </div>
   <% end %>
- 
-  <p>
+
+  <div class="form-group col-sm-3"> 
     <%= f.label (:title) %><br>
-    <%= f.text_field :title %>
-  </p>
+    <%= f.text_field :title, required: true, class: 'form-control' %>
+  </div><br><br><br><br>
  
-  <p>
+  <div class="form-group col-sm-3">
     <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </p>
-  <% #select_tag(:city_id, options_for_select([[ "VISA", 1],["MasterCard", 2] ])) %>
- 
-  <p>
-    <%= f.submit %>
-  </p>
- 
+    <%= f.text_area :text, required: true, class: 'form-control' %>
+  </div><br><br><br><br><br>
+
+  <div class="form-group col-sm-3">
+    <%= f.label :Will_Publish_on %><br>
+    <%= f.text_field :posted_on, class: 'datepicker form-control', required: true %>
+  </div><br><br><br><br>
+
+  <div class="form-group col-sm-4">
+    <%= f.submit 'Submit', class: 'btn btn-default' %>
+  </div>
+ </div>
 <% end %>

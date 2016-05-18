@@ -1,13 +1,15 @@
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-</p>
- 
+<dl>
+  <dt><kbd>Title:</kbd></dt>
+  <p class="lead">-><%= @article.title %></p>
+
+  <dt><kbd>Text:</kbd></dt>
+  <p class="lead">-><%= @article.text %></p>
+
+
+  <dt><kbd>Posted Date:</kbd></dt>
+  <p class="lead">-><%= @article.posted_on %></p>
+</dl>
+
 <h2>Comments</h2>
 <%= render @article.comments %>
  

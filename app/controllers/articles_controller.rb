@@ -9,10 +9,12 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params) 
+    @article = Article.new(article_params)
     if @article.save
+      flash[:success] = 'Successfully published'
       redirect_to @article
     else
+      flash[:danger] = 'Not published article'
       redirect_to @article
       #render :new
       #redirect_to new_article_path
@@ -50,8 +52,7 @@ class ArticlesController < ApplicationController
 
 private
   def article_params
-    
-    params.require(:article).permit(:title, :text)
+    params.require(:article).permit(:title, :text, :posted_on)
   end
   
 end
