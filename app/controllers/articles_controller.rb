@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @article.images.build
   end
 
   def create
@@ -15,7 +16,7 @@ class ArticlesController < ApplicationController
       redirect_to @article
     else
       flash[:danger] = 'Not published article'
-      redirect_to @article
+      render 'new'
       #render :new
       #redirect_to new_article_path
     end
@@ -27,12 +28,14 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    @article.images.build
   end
 
   def update
     @article = Article.find(params[:id])
  
     if @article.update(article_params)
+      flash[:success] = 'Article is updated'
       redirect_to @article
     else
       render 'edit'
@@ -41,8 +44,8 @@ class ArticlesController < ApplicationController
 
   def destroy
     article = Article.find(params[:id])
+    flash[:notice] = 'Successfully Destroyed'
     article.destroy
- 
     redirect_to articles_path
   end
 
@@ -52,7 +55,7 @@ class ArticlesController < ApplicationController
 
 private
   def article_params
-    params.require(:article).permit(:title, :text, :posted_on)
+    params.require(:article).permit(:title, :text, :posted_on, images_attributes: [:photo, :id, :caption, :photo_file_name, :_destroy])
   end
   
 end

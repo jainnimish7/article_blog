@@ -1,0 +1,20 @@
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#flash').fadeOut();
+  }, 2000);
+ })
+</script>
+
+<% flash.each do |key, value| %>
+<div id="flash">
+  <div class="alert alert-<%= key %>">
+    <ul>
+      <li>
+        <%= value %>
+        <a href="#" data-dismiss="alert" class="close">×</a>
+      </li>
+    </ul>
+    </div>
+  </div>
+<% end %>

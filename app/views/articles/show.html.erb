@@ -1,13 +1,17 @@
 <dl>
-  <dt><kbd>Title:</kbd></dt>
-  <p class="lead">-><%= @article.title %></p>
+  <p><kbd>Title:</kbd>->
+  <%= @article.title %></p>
 
-  <dt><kbd>Text:</kbd></dt>
-  <p class="lead">-><%= @article.text %></p>
+  <p><kbd>Text:</kbd>->
+  <%= @article.text %></p>
 
+  <p><kbd>Posted Date:</kbd>
+  -><%= @article.posted_on %></p>
 
-  <dt><kbd>Posted Date:</kbd></dt>
-  <p class="lead">-><%= @article.posted_on %></p>
+  <dt><kbd>Photo:</kbd></dt>
+  <% if @article.images.present? %>
+    <%= image_tag @article.images.last.photo.url(:small) %>
+  <% end %>
 </dl>
 
 <h2>Comments</h2>
