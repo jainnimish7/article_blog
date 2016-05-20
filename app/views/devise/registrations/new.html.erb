@@ -1,46 +1,102 @@
+<style type="text/css">
+  .simple_form label {
+  float: left;
+  width: 100px;
+  text-align: right;
+  margin: 3px 10px;
+}
+
+.simple_form div.input {
+  margin-bottom: 10px;
+}
+
+.simple_form div.boolean, .simple_form input[type='submit'] {
+  margin-left: 120px;
+}
+
+.simple_form div.boolean label, .simple_form label.collection_radio {
+  float: none;
+  margin: 0;
+}
+
+.simple_form label.collection_radio {
+  margin-right: 10px;
+  margin-left: 2px;
+}
+
+.simple_form .error {
+  clear: left;
+  margin-left: 120px;
+  font-size: 12px;
+  color: #D00;
+  display: block;
+}
+
+.simple_form .radio {
+  margin-left: 22px;
+}
+
+.simple_form .hint {
+  clear: left;
+  margin-left: 120px;
+  font-size: 12px;
+  color: #555;
+  display: block;
+  font-style: italic;
+}
+
+</style>
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%#= devise_error_messages! %>
 
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :First_name %><br />
     <%= f.text_field :first_name, autofocus: true %>
-  </div>
+  </div> -->
+  <%= f.input :first_name %>
 
-  <div class="field">
+  <!--   <div class="field">
     <%= f.label :Last_name %><br />
     <%= f.text_field :last_name %>
-  </div>
+    </div> -->
+  <%= f.input :last_name %>
 
-  <div class="field">
+  <!--   <div class="field">
     <%= f.radio_button :gender, 'male' %> 
     <%= f.label :gender, 'Male', :value => 'male' %>
     <%= f.radio_button :gender, 'female' %>
     <%= f.label :gender, 'Female', :value => 'female' %>
-  </div>
+    </div> -->
 
-  <div class="field">
+  <%= f.input :gender, as: :radio_buttons, collection: ['Male', 'Female'] %><br><br>
+
+  <!--   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email %>
-  </div>
+    </div> -->
+  <%= f.input :email, placeholder: 'user@domain.com' %>
 
-  <div class="field">
+  <!--   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    </div> -->
+  <%= f.input :password, hint: 'Minimum 8 characters characters.' %>
 
-  <div class="field">
+  <!--   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    </div> -->
+  <%= f.input :password_confirmation, hint: 'should be same as above characters.' %>
 
-  <div class="actions">
+  <!-- <div class="actions">
     <%= f.submit "Sign up" %>
-  </div>
+  </div> -->
+  <%= f.button :submit %>
 <% end %>
 
 <%= render "devise/shared/links" %>
