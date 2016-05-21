@@ -23,7 +23,9 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><%= link_to 'Article\'s Index', articles_path %></li>
+          <% if current_user.has_role? :admin %>
+            <li><%= link_to 'Article\'s Index', articles_path %></li>
+          <% end %>
           <li><%= link_to 'Create New article', new_article_path %></li>
           <li>
             <form class="navbar-form navbar-left" role="search">
@@ -34,11 +36,14 @@
           </li>
           <li> <%= link_to "Search", search_path %></li>
           <li> <%= link_to "My Article", home_articles_path %></li>
+          <% if current_user.has_role? :admin %>
+            <li><%= link_to 'Assign Role', welcome_listing_path  %></li>
+          <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li> <%= link_to "Edit Profile", edit_user_registration_path %></li>
           <li><%= link_to "Sign out", destroy_user_session_path, class: "navbar-brand", :method => :delete %></li>
-        </ul>  
+        </ul>
       </div>
     </div>
   </nav>

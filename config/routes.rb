@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'welcome/index'
+  get 'welcome/listing'
 
   #get 'shubh/index'
   resources :articles do
@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     get :home, on: :collection
     resources :comments
   end
+
+  resources :welcome, only: [:update]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

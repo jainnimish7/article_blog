@@ -1,0 +1,20 @@
+<h1>All Users</h1>
+ 
+<table class="table">
+  <tr >
+    <th>Name</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th><center>Action</center></th>
+  </tr>
+ 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.first_name.concat(user.last_name) %></td>
+      <td><%= user.email %></td>
+      <td><%= select_tag :role,options_for_select(Role.all.map {|role| [role.name, role.id]})  %></td>
+      <td><%= link_to 'Update' %></td>
+    </tr>
+  <% end %>
+</table>
+
