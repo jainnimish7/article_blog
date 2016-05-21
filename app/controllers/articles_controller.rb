@@ -4,16 +4,20 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 
+  def home
+    @articles = current_user.articles
+  end
+
   def new
     @article = Article.new
     @article.images.build
   end
 
   def create
-    @article = Article.new(article_params)
-    if @article.save
+    user = User.find(current_user.id)
+    if user.articles.create(article_params)
       flash[:success] = 'Successfully published'
-      redirect_to @article
+      redirect_to articles_path
     else
       flash[:danger] = 'Not published article'
       render 'new'
@@ -55,7 +59,7 @@ class ArticlesController < ApplicationController
 
 private
   def article_params
-    params.require(:article).permit(:title, :text, :posted_on, images_attributes: [:photo, :id, :caption, :photo_file_name, :_destroy])
+    params.require(:article).permit(:title, :text, :posted_on, :user_id, images_attributes: [:photo, :id, :caption, :photo_file_name, :_destroy])
   end
   
 end
