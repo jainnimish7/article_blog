@@ -12,8 +12,11 @@
     <tr>
       <td><%= user.first_name.concat(user.last_name) %></td>
       <td><%= user.email %></td>
-      <td><%= select_tag :role,options_for_select(Role.all.map {|role| [role.name, role.id]})  %></td>
-      <td><%= link_to 'Update' %></td>
+      <%= form_for user, url: welcome_path(user.id) do |f| %>
+        <td><%= f.select :role,options_for_select(Role.all.pluck(:name), selected: user.roles.last.name)  %></td>
+        <td><%= f.submit 'Update' %> <%= link_to "", welcome_path(user.id),  class: 'glyphicon glyphicon-trash', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+
     </tr>
   <% end %>
 </table>
